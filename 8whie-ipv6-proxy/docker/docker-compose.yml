@@ -1,0 +1,28 @@
+# ==============================================================================
+# 8WHIE IPv6 Proxy Manager - Docker Compose Orchestration
+# Developer: Aryan Thakur
+# Brand: 8WHIE
+# ==============================================================================
+
+version: '3.8'
+
+services:
+  8whie-proxy:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: 8whie-ipv6-proxy-server
+    restart: unless-stopped
+    # Use host network mode for direct access to host IPv6 interfaces:
+    network_mode: "host"
+    volumes:
+      - ./data/config:/etc/8whie-proxy:rw
+      - ./data/logs:/var/log/8whie-proxy:rw
+    environment:
+      - WHIE_CONFIG_PATH=/etc/8whie-proxy/config.json
+      - PYTHONUNBUFFERED=1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"

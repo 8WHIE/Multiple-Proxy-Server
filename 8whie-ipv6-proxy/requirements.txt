@@ -1,0 +1,17 @@
+# 8WHIE IPv6 Proxy Manager Dependencies
+# Built by Aryan Thakur (8WHIE)
+
+# CLI Interface & formatting
+click>=8.1.7
+rich>=13.7.1
+
+# Configuration parsing
+PyYAML>=6.0.1
+
+# Security & hashing
+bcrypt>=4.1.2
+cryptography>=42.0.5
+
+# Test framework
+pytest>=8.0.0
+pytest-asyncio>=0.23.5

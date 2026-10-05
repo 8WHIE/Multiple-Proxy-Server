@@ -1,0 +1,6 @@
+{
+  "name": "8WHIE IPv6 Proxy Manager",
+  "description": "A self-hosted IPv6 multi-proxy management system for Linux servers, built by Aryan Thakur under the 8WHIE brand.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

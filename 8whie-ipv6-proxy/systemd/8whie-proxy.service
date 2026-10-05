@@ -1,0 +1,49 @@
+# ==============================================================================
+# 8WHIE IPv6 Proxy Manager - Systemd Unit File
+# Brand: 8WHIE
+# Developer: Aryan Thakur
+# License: Apache-2.0
+# ==============================================================================
+
+[Unit]
+Description=8WHIE IPv6 Multi-Proxy Server Daemon
+Documentation=https://github.com/8whie/8whie-ipv6-proxy
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=whieproxy
+Group=whieproxy
+WorkingDirectory=/opt/8whie-proxy
+ExecStart=/opt/8whie-proxy/venv/bin/python3 -m src.cli start all
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=5s
+KillMode=mixed
+TimeoutStopSec=20s
+
+# Security Hardening & Sandboxing
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictRealtime=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+
+# Allowed read/write file locations
+ReadWritePaths=/etc/8whie-proxy /var/log/8whie-proxy /run/8whie-proxy
+
+# Environmental variables
+Environment=WHIE_CONFIG_PATH=/etc/8whie-proxy/config.json
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

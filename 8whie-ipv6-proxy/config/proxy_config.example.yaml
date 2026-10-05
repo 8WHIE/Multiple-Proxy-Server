@@ -1,0 +1,35 @@
+# 8WHIE IPv6 Proxy Manager - Configuration Template
+# Brand: 8WHIE
+# Developer: Aryan Thakur
+
+system:
+  name: "8WHIE IPv6 Proxy Manager"
+  developer: "Aryan Thakur"
+  version: "1.0.0"
+  log_level: "INFO"
+  log_file: "/var/log/8whie-proxy/manager.log"
+  pid_file: "/run/8whie-proxy/manager.pid"
+  listen_host: "::"
+
+proxies:
+  - id: "px-http-8080"
+    type: "http"
+    port: 8080
+    ipv6_address: "2001:db8::10"
+    username: "aryan_proxy"
+    password_hash: "$2b$12$eX4mP1eH4sH8wh1eSecur3H4shExampleDoNotUseInProd123456"
+    enabled: true
+    max_connections: 500
+    timeout_seconds: 60
+    description: "Primary HTTP IPv6 outbound tunnel"
+
+  - id: "px-socks-1080"
+    type: "socks5"
+    port: 1080
+    ipv6_address: "2001:db8::11"
+    username: "aryan_socks"
+    password_hash: "$2b$12$fX4mP1eH4sH8wh1eSecur3H4shExampleDoNotUseInProd654321"
+    enabled: true
+    max_connections: 500
+    timeout_seconds: 60
+    description: "Dedicated SOCKS5 IPv6 scraping endpoint"
